@@ -1,13 +1,12 @@
-import { useEffect } from "react";
-import { api } from "../../services/api";
+import { useContext,} from "react";
+import { useTransactions } from "../../hooks/useTransactions";
 import { Container } from "./style";
 
-export function TransactionTable() {
 
-    useEffect(() => {
-        api.get('/transaction')
-            .then(response => console.log(response.data))
-    }, [])
+
+export function TransactionTable() {
+    const {transactions} = useTransactions();;
+
 
     return (
         <Container>
@@ -21,24 +20,20 @@ export function TransactionTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Desenvolcimento de site</td>
-                        <td className="deposit" >R$12000,00</td>
-                        <td>Venda</td>
-                        <td>3/11/2021</td>
+                    {transactions.map(response =>(  
+                    <tr key={response.id}>
+                        <td>{response.title}</td>
+                        <td className={response.type}>
+                            {new Intl.NumberFormat('pt-BR', {
+                            style: 'currency', 
+                            currency:'BRL'})
+                        .format(response.amount)}
+                        </td>
+                        <td>{response.category}</td>
+                        <td>{new Intl.DateTimeFormat('pt-BR')
+                        .format(new Date(response.createdAt))}</td>
                     </tr>
-                    <tr>
-                        <td>Hamburger</td>
-                        <td className="withdraw" >- R$35,00</td>
-                        <td>Alimentação</td>
-                        <td>29/10/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Revisão carro</td>
-                        <td className="withdraw">- R$1200,00</td>
-                        <td>Mecânica</td>
-                        <td>23/10/2021</td>
-                    </tr>
+                    ))}
 
                 </tbody>
             </table>

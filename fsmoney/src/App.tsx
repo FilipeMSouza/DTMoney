@@ -4,6 +4,8 @@ import { Header } from "./components/Header";
 import { GlobalStyle } from "./styles/global";
 import { useState } from "react";
 import { NTModal } from "./components/NTModal";
+import {TransactionsProvider} from './hooks/useTransactions'
+
 
 Modal.setAppElement('#root');
 
@@ -18,7 +20,7 @@ export function App() {
         setIsNTModalOpen(false);
     }
     return (
-        <>
+        <TransactionsProvider>
             <Header onOpenNTModal={handleOpenNTModal} />
             <DashBoard />
             <NTModal 
@@ -26,7 +28,7 @@ export function App() {
                 onRequestClose ={handleCloseNTModal}
             />
             <GlobalStyle />
-        </>
+        </TransactionsProvider>
     );
 }
 

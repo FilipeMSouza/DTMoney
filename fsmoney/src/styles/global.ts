@@ -75,5 +75,10 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: column-reverse
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 }
 `
