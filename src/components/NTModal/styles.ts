@@ -63,12 +63,15 @@ const colors ={
 
 export const RadioBox = styled.button<RadioBoxProps>`
         height: 4rem;
-        border: 1px solid #d7d7d7;
         border-radius: 0.25rem;
 
         background: ${(props)=> props.isActive 
-        ? transparentize(0.9, colors[props.activeColor]) 
+        ? transparentize(0.7, colors[props.activeColor]) 
         : 'transpaten'};
+        
+        border: 2px solid ${(props)=> props.isActive 
+        ? colors[props.activeColor] 
+        : '#d7d7d7'};
 
         display: flex;
         align-items: center;
